@@ -1,5 +1,13 @@
 // JavaScript Document
+window.requestAnimationFrame = window.requestAnimationFrame || window.webkitRequestAnimationFrame;
 
+function gameLoop() {
+    
+    universe.focus.update();
+    
+    window.requestAnimationFrame(gameLoop);
+    
+};
 
 function generateRandomUniverse(numOfSystems) {
     
@@ -39,13 +47,17 @@ function generateRandomUniverse(numOfSystems) {
             
         } while (collision == true);
         
-        systemData.push({coordX: x, coordY: y});
+        newSystem.coordX = x;
+        newSystem.coordY = y;
+        newSystem.radius = getRandomInt(300, 700) / 10000;
+        
+        systemData.push(newSystem);
         
     }
     
     return systemData;
     
-}
+};
 
 var game = {
     
@@ -62,7 +74,7 @@ var game = {
         universe.render(systems);
         
     }
-}
+};
 
 var universe = {
     
@@ -76,6 +88,8 @@ var universe = {
             
             system.coords = {x: data[i].coordX * w, y: data[i].coordY * w};
             system.realTimeCoords = {x: data[i].coordX * w, y: data[i].coordY * w};
+            system.endCoords = {x: data[i].coordX * w, y: data[i].coordY * w};
+            system.radius = data[i].radius * w;
             
             universe.systems.push(system);
             
@@ -89,7 +103,7 @@ var universe = {
         for(var i = 0; i < universe.systems.length; i++) {
             
             var s = universe.systems[i];
-            $('#systems').append('<div id="system_'+i+'" class="system" style="-webkit-transform:translate3d('+s.coords.x+'px, '+s.coords.y+'px, 0px);transform:translate3d('+s.coords.x+'px, '+s.coords.y+'px, 0px);"></div>');
+            $('#systems').append('<div id="system_'+i+'" class="system" style="width:'+s.radius*2+'px; height:'+s.radius*2+'px;-webkit-transform:translate3d('+(s.coords.x - s.radius)+'px, '+(s.coords.y - s.radius)+'px, 0px);transform:translate3d('+(s.coords.x - s.radius)+'px, '+(s.coords.y - s.radius)+'px, 0px);"></div>');
             
         }
         
@@ -99,7 +113,6 @@ var universe = {
         u.addEventListener('touchend', universe.touchEnd);
         
     },
-    
     touchCoord: null,
     touchStart: function(e) {
         
@@ -122,7 +135,6 @@ var universe = {
             
             if (e.touches[i].identifier == universe.touchCoord.id) {
                 
-                // Code
                 var touch = e.touches[0],
                     moveCoords = {x: touch.pageX, y: touch.pageY},
                     dif = {moveX: moveCoords.x - universe.touchCoord.x, moveY: moveCoords.y - universe.touchCoord.y};
@@ -151,32 +163,43 @@ var universe = {
             
             if (e.changedTouches[i].identifier == universe.touchCoord.id) {
                 
-                // Code
+                var endCoords = {x: e.changedTouches[0].pageX, y: e.changedTouches[0].pageY},
+                    dif = {moveX: endCoords.x - universe.touchCoord.x, moveY: endCoords.y - universe.touchCoord.y};
+                
+                for (var i = 0; i < universe.systems.length; i++) {
+                    
+                    var x = dif.moveX + universe.systems[i].coords.x,
+                        y = dif.moveY + universe.systems[i].coords.y;
+                    
+                    universe.systems[i].endCoords = {x: x, y: y};
+                    
+                }
+                
+            }
+            
+        }
+        
+    },
+    focus: {
+        
+        frame:  30,
+        frames: 30,
+        init: function() {
+            
+            
+            universe.focus.frame = 0;
+            
+        },
+        update: function() {
+            
+            if (universe.focus.frame < universe.focus.frames) {
+                
+                universe.focus.frame++;
                 
             }
             
         }
         
     }
-}
-
-function lineDistance(point1, point2) {
     
-    var xs = 0,
-        ys = 0;
-    
-    xs = Math.pow(point2.x - point1.x, 2);
-    ys = Math.pow(point2.y - point1.y, 2);
-    
-    return Math.sqrt(xs + ys);
-    
-}
-
-function getRandomInt(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-function testAlert(alert) {
-    $('#for_testing').css('display', 'block');
-    $('#for_testing').append(alert);
-}
+};
