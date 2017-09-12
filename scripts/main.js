@@ -1,6 +1,21 @@
 // JavaScript Document
 window.requestAnimationFrame = window.requestAnimationFrame || window.webkitRequestAnimationFrame;
 
+
+var db;
+function initDB() {
+    
+    db = window.openDatabase('Database', 1.0, 'AppGame', 2097152);
+    db.transaction(createTB, errorCB);
+    
+}
+function createTB(tx) {
+    tx.executeSql('CREATE TABLE IF NOT EXISTS StarSystems(coordX, coordY, radius)');
+}
+function errorCB(err) {
+    alert(err);
+}
+
 function gameLoop() {
     
     universe.focus.update();
@@ -11,11 +26,13 @@ function gameLoop() {
 
 function generateRandomUniverse(numOfSystems) {
     
-    var systemData = [];
+    var systemData = [],
+        planetData = [];
     
     for (var i = 0; i < numOfSystems; i++) {
         
-        var newSystem = {};
+        var newSystem = {},
+            numOfPlanets = getRandomInt(1, 5);
         
         var x, y, name;
         
@@ -52,6 +69,34 @@ function generateRandomUniverse(numOfSystems) {
         newSystem.radius = getRandomInt(300, 700) / 10000;
         
         systemData.push(newSystem);
+        
+        var orbitDirection = getRandomInt(1, 2),
+            orbits = [0, 1, 2, 3, 4];
+        for (var j = 0; j < numOfPlanets; j++) {
+            
+            var newPlanet = [];
+            
+            var speed,
+                rotation;
+            if (orbitDirection == 1) {
+                speed = getRandomInt(-50, -10);
+                rotation = getRandomInt(-180, -1);
+            } else {
+                speed = getRandomInt(10, 50);
+                rotation = getRandomInt(1, 180);
+            }
+            
+            var randOrbitIndex = getRandomInt(0, orbits.length - 1);
+            newPlanet.orbit = orbits[randOrbitIndex];
+            orbits.splice(randOrbitIndex, 1);
+            
+            newPlanet.orbitSpeed = speed / 100;
+            newPlanet.rotation = rotation;
+            newSystem.radius = Math.round(getRandomInt(15, 21)) / 1000;
+            
+            planetData.push(newPlanet);
+            
+        }
         
     }
     

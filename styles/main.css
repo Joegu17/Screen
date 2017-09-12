@@ -63,11 +63,12 @@ table {
 }
 
 #universe {
-    background: rgb(37, 37, 98);
     position: fixed;
     left: 0px;
     top: 0px;
     overflow: hidden;
+    background-image: url(../images/background.svg);
+    background-size: cover;
 }
 #systems {
     position: absolute;
@@ -79,5 +80,8 @@ table {
     left: 0px;
     top: 0px;
     border-radius: 50%;
-    background: white;
+    background-image: url(../images/sun.svg);
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
