@@ -75,6 +75,7 @@ var universe = {
             var system = {};
             
             system.coords = {x: data[i].coordX * w, y: data[i].coordY * w};
+            system.realTimeCoords = {x: data[i].coordX * w, y: data[i].coordY * w};
             
             universe.systems.push(system);
             
@@ -88,12 +89,75 @@ var universe = {
         for(var i = 0; i < universe.systems.length; i++) {
             
             var s = universe.systems[i];
-            $('#systems').append('<div class="system" style="-webkit-transform:translate3d('+s.coords.x+'px, '+s.coords.y+'px, 0px);transform:translate3d('+s.coords.x+'px, '+s.coords.y+'px, 0px);"></div>');
+            $('#systems').append('<div id="system_'+i+'" class="system" style="-webkit-transform:translate3d('+s.coords.x+'px, '+s.coords.y+'px, 0px);transform:translate3d('+s.coords.x+'px, '+s.coords.y+'px, 0px);"></div>');
+            
+        }
+        
+        var u = document.getElementById('universe');
+        u.addEventListener('touchstart', universe.touchStart);
+        u.addEventListener('touchmove', universe.touchMove);
+        u.addEventListener('touchend', universe.touchEnd);
+        
+    },
+    
+    touchCoord: null,
+    touchStart: function(e) {
+        
+        e.preventDefault();
+        var touch = e.touches[0];
+        
+        if (e.touches.length == 1) {
+            
+            // Code
+            universe.touchCoord = {x: touch.pageX, y: touch.pageY, id: touch.identifier};
+            
+        }
+        
+    },
+    touchMove: function(e) {
+        
+        e.preventDefault();
+        
+        for (var i = 0; i < e.touches.length; i++) {
+            
+            if (e.touches[i].identifier == universe.touchCoord.id) {
+                
+                // Code
+                var touch = e.touches[0],
+                    moveCoords = {x: touch.pageX, y: touch.pageY},
+                    dif = {moveX: moveCoords.x - universe.touchCoord.x, moveY: moveCoords.y - universe.touchCoord.y};
+                
+                for (var i = 0; i < universe.systems.length; i++) {
+                    
+                    var x = parseInt((dif.moveX + universe.systems[i].coords.x)*10)/10,
+                        y = parseInt((dif.moveY + universe.systems[i].coords.y)*10)/10;
+                    
+                    universe.systems[i].realTimeCoords.x = x;
+                    universe.systems[i].realTimeCoords.y = y;
+                    
+                    $('#system_'+i).css('-webkit-transform', 'translate3d('+x+'px, '+y+'px, 0px)');
+                    $('#system_'+i).css('transform', 'translate3d('+x+'px, '+y+'px, 0px)');
+                    
+                }
+                
+            }
+            
+        }
+        
+    },
+    touchEnd: function(e) {
+        
+        for (var i = 0; i < e.changedTouches.length; i++) {
+            
+            if (e.changedTouches[i].identifier == universe.touchCoord.id) {
+                
+                // Code
+                
+            }
             
         }
         
     }
-    
 }
 
 function lineDistance(point1, point2) {
