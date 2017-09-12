@@ -73,6 +73,8 @@ var game = {
         var systems = generateRandomUniverse(30);
         universe.render(systems);
         
+        gameLoop();
+        
     }
 };
 
@@ -121,8 +123,8 @@ var universe = {
         
         if (e.touches.length == 1) {
             
-            // Code
             universe.touchCoord = {x: touch.pageX, y: touch.pageY, id: touch.identifier};
+            universe.focus.frame = universe.focus.frames;
             
         }
         
@@ -142,13 +144,14 @@ var universe = {
                 for (var i = 0; i < universe.systems.length; i++) {
                     
                     var x = parseInt((dif.moveX + universe.systems[i].coords.x)*10)/10,
-                        y = parseInt((dif.moveY + universe.systems[i].coords.y)*10)/10;
+                        y = parseInt((dif.moveY + universe.systems[i].coords.y)*10)/10,
+                        r = universe.systems[i].radius;
                     
                     universe.systems[i].realTimeCoords.x = x;
                     universe.systems[i].realTimeCoords.y = y;
                     
-                    $('#system_'+i).css('-webkit-transform', 'translate3d('+x+'px, '+y+'px, 0px)');
-                    $('#system_'+i).css('transform', 'translate3d('+x+'px, '+y+'px, 0px)');
+                    $('#system_'+i).css('-webkit-transform', 'translate3d('+(x - r)+'px, '+(y - r)+'px, 0px)');
+                    $('#system_'+i).css('transform', 'translate3d('+(x - r)+'px, '+(y - r)+'px, 0px)');
                     
                 }
                 
@@ -166,14 +169,30 @@ var universe = {
                 var endCoords = {x: e.changedTouches[0].pageX, y: e.changedTouches[0].pageY},
                     dif = {moveX: endCoords.x - universe.touchCoord.x, moveY: endCoords.y - universe.touchCoord.y};
                 
+                var focus,
+                    dist = 0;
+                
                 for (var i = 0; i < universe.systems.length; i++) {
+                    
+                    var line;
                     
                     var x = dif.moveX + universe.systems[i].coords.x,
                         y = dif.moveY + universe.systems[i].coords.y;
                     
+                    line = lineDistance({x: 0, y: 0}, {x: x, y: y});
+                    
                     universe.systems[i].endCoords = {x: x, y: y};
                     
+                    if (line < dist || i == 0) {
+                        
+                        dist = line;
+                        focus = universe.systems[i];
+                        
+                    }
+                    
                 }
+                
+                universe.focus.init(focus);
                 
             }
             
@@ -184,17 +203,37 @@ var universe = {
         
         frame:  30,
         frames: 30,
-        init: function() {
+        cange: {},
+        init: function(f) {
             
+            var moveX = -f.endCoords.x;
+            var moveY = -f.endCoords.y;
+            
+            universe.focus.cange = {x: moveX, y: moveY};
             
             universe.focus.frame = 0;
             
         },
         update: function() {
             
-            if (universe.focus.frame < universe.focus.frames) {
+            var u = universe.focus;
+            if (u.frame < u.frames) {
                 
-                universe.focus.frame++;
+                u.frame++;
+                
+                for (var i = 0; i < universe.systems.length; i++) {
+                    
+                    var left = ease.outExpo(u.frame, universe.systems[i].endCoords.x, u.cange.x, u.frames),
+                        top = ease.outExpo(u.frame, universe.systems[i].endCoords.y, u.cange.y, u.frames),
+                        radius = universe.systems[i].radius;
+                    
+                    universe.systems[i].realTimeCoords = {x: left, y: top};
+                    universe.systems[i].coords = {x: left, y: top};
+                    
+                    $('#system_'+i).css('-webkit-transform', 'translate3d('+(left - radius)+'px, '+(top - radius)+'px, 0px)');
+                    $('#system_'+i).css('transform', 'translate3d('+(left - radius)+'px, '+(top - radius)+'px, 0px)');
+                    
+                }
                 
             }
             
