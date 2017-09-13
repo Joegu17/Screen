@@ -252,6 +252,8 @@ var universe = {
     },
     touchTap: function(e) {
         
+        alert(hallo);
+        
         var x = touch.pageX,
             y = touch.pageY;
         
