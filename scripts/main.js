@@ -125,8 +125,6 @@ var game = {
 
 var universe = {
     
-    time: 0,
-    
     systems: [],
     render: function(data) {
         
@@ -157,9 +155,10 @@ var universe = {
         }
         
         var u = document.getElementById('universe');
-        u.addEventListener('touchstart', universe.touchStart);
-        u.addEventListener('touchmove', universe.touchMove);
-        u.addEventListener('touchend', universe.touchEnd);
+        //u.addEventListener('touchstart', universe.touchStart);
+        //u.addEventListener('touchmove', universe.touchMove);
+        //u.addEventListener('touchend', universe.touchEnd);
+        u.addEventListener('click', universe.touchTap);
         
     },
     touchCoord: null,
@@ -214,48 +213,37 @@ var universe = {
     },
     touchEnd: function(e) {
         
-        var timeNow = Data.now(),
-            div = timeNow - time;
-        
-        if (div < 100) {
-            
-            universe.touchTap();
-            
-        } else {
-        
-            for (var i = 0; i < e.changedTouches.length; i++) {
+        for (var i = 0; i < e.changedTouches.length; i++) {
 
-                if (e.changedTouches[i].identifier == universe.touchCoord.id) {
+            if (e.changedTouches[i].identifier == universe.touchCoord.id) {
 
-                    var endCoords = {x: e.changedTouches[0].pageX, y: e.changedTouches[0].pageY},
-                        dif = {moveX: endCoords.x - universe.touchCoord.x, moveY: endCoords.y - universe.touchCoord.y};
+                var endCoords = {x: e.changedTouches[0].pageX, y: e.changedTouches[0].pageY},
+                    dif = {moveX: endCoords.x - universe.touchCoord.x, moveY: endCoords.y - universe.touchCoord.y};
 
-                    var focus,
-                        dist = 0;
+                var focus,
+                    dist = 0;
 
-                    for (var i = 0; i < universe.systems.length; i++) {
+                for (var i = 0; i < universe.systems.length; i++) {
 
-                        var line;
+                    var line;
 
-                        var x = dif.moveX + universe.systems[i].coords.x,
+                    var x = dif.moveX + universe.systems[i].coords.x,
                             y = dif.moveY + universe.systems[i].coords.y;
 
-                        line = lineDistance({x: 0, y: 0}, {x: x, y: y});
+                    line = lineDistance({x: 0, y: 0}, {x: x, y: y});
 
-                        universe.systems[i].endCoords = {x: x, y: y};
+                    universe.systems[i].endCoords = {x: x, y: y};
 
-                        if (line < dist || i == 0) {
+                    if (line < dist || i == 0) {
 
-                            dist = line;
-                            focus = universe.systems[i];
-
-                        }
+                        dist = line;
+                        focus = universe.systems[i];
 
                     }
 
-                    universe.focus.init(focus);
-
                 }
+
+                universe.focus.init(focus);
 
             }
             
