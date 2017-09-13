@@ -128,7 +128,7 @@ var universe = {
     systems: [],
     render: function(data) {
         
-        var w = window.innerWidth;
+        var w = window.innerWidth * 2;
         for (var i = 0; i < data.length; i++) {
             
             var system = {};
