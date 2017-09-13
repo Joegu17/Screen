@@ -155,10 +155,10 @@ var universe = {
         }
         
         var u = document.getElementById('universe');
-        //u.addEventListener('touchstart', universe.touchStart);
-        //u.addEventListener('touchmove', universe.touchMove);
-        //u.addEventListener('touchend', universe.touchEnd);
-        u.addEventListener('click', universe.touchTap);
+        u.addEventListener('touchstart', universe.touchStart);
+        u.addEventListener('touchmove', universe.touchMove);
+        u.addEventListener('touchend', universe.touchEnd);
+        
         
     },
     touchCoord: null,
@@ -245,29 +245,6 @@ var universe = {
 
                 universe.focus.init(focus);
 
-            }
-            
-        }
-        
-    },
-    touchTap: function(e) {
-        
-        alert(hallo);
-        
-        var x = touch.pageX,
-            y = touch.pageY;
-        
-        if (x > -10 && x < 10 && y > -10 && y < 10) {
-            
-            for (var i = 0; i < universe.systems.length; i++) {
-                
-                var radius = universe.systems[i].radius *= 2,
-                    x = universe.systems[i].coords.x *= 2,
-                    y = universe.systems[i].coords.y *= 2;
-                
-                $('#system_'+i).css('-webkit-transform', 'translate3d('+(x - radius)+'px, '+(y - radius)+'px, 0px)');
-                $('#system_'+i).css('transform', 'translate3d('+(x - radius)+'px, '+(y - radius)+'px, 0px)');
-                
             }
             
         }
