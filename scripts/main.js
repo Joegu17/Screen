@@ -108,8 +108,8 @@ var game = {
     
     init: function() {
         
-        var w = window.innerWidth,
-            h = window.innerHeight;
+        var w = window.innerWidth + 20,
+            h = window.innerHeight + 20;
         
         $('#universe').css({width: w+'px', height: h+'px'});
         $('#systems').css('-webkit-transform', 'translate3d('+w/2+'px, '+h/2+'px, 0px)');
