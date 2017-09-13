@@ -54,7 +54,7 @@ function generateRandomUniverse(numOfSystems) {
             
             for (var j = 0; j < systemData.length; j++) {
                 
-                if (lineDistance({x: x, y: y}, {x: systemData[j].coordX, y: systemData[j].coordY}) < 0.3) {
+                if (lineDistance({x: x, y: y}, {x: systemData[j].coordX, y: systemData[j].coordY}) < 0.15) {
                     
                     collision = true;
                     
@@ -115,7 +115,7 @@ var game = {
         $('#systems').css('-webkit-transform', 'translate3d('+w/2+'px, '+h/2+'px, 0px)');
         $('#systems').css('transform', 'translate3d('+w/2+'px, '+h/2+'px, 0px)');
         
-        var systems = generateRandomUniverse(30);
+        var systems = generateRandomUniverse(50);
         universe.render(systems);
         
         gameLoop();
