@@ -231,7 +231,7 @@ var universe = {
                     
                     universe.systems[j].endCoords = {x: x, y: y};
                     
-                    if (line < dist || i == 0) {
+                    if (line < dist || j == 0) {
                         
                         dist = line;
                         focus = universe.systems[j];
