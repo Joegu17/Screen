@@ -22,7 +22,7 @@ function gameLoop() {
     
     window.requestAnimationFrame(gameLoop);
     
-}
+};
 
 function generateRandomUniverse(numOfSystems) {
     
@@ -54,7 +54,7 @@ function generateRandomUniverse(numOfSystems) {
             
             for (var j = 0; j < systemData.length; j++) {
                 
-                if (lineDistance({x: x, y: y}, {x: systemData[j].coordX, y: systemData[j].coordY}) < 0.15) {
+                if (lineDistance({x: x, y: y}, {x: systemData[j].coordX, y: systemData[j].coordY}) < 0.3) {
                     
                     collision = true;
                     
@@ -102,7 +102,7 @@ function generateRandomUniverse(numOfSystems) {
     
     return systemData;
     
-}
+};
 
 var game = {
     
@@ -115,13 +115,13 @@ var game = {
         $('#systems').css('-webkit-transform', 'translate3d('+w/2+'px, '+h/2+'px, 0px)');
         $('#systems').css('transform', 'translate3d('+w/2+'px, '+h/2+'px, 0px)');
         
-        var systems = generateRandomUniverse(50);
+        var systems = generateRandomUniverse(30);
         universe.render(systems);
         
         gameLoop();
         
     }
-}
+};
 
 var universe = {
     
@@ -159,7 +159,6 @@ var universe = {
         u.addEventListener('touchmove', universe.touchMove);
         u.addEventListener('touchend', universe.touchEnd);
         
-        
     },
     touchCoord: null,
     touchStart: function(e) {
@@ -169,12 +168,7 @@ var universe = {
         
         if (e.touches.length == 1) {
             
-            var time = Date.now();
-            
-            var x = touch.pageX,
-                y = touch.pageY;
-            
-            universe.touchCoord = {x: x, y: y, id: touch.identifier};
+            universe.touchCoord = {x: touch.pageX, y: touch.pageY, id: touch.identifier};
             universe.focus.frame = universe.focus.frames;
             
         }
@@ -214,37 +208,37 @@ var universe = {
     touchEnd: function(e) {
         
         for (var i = 0; i < e.changedTouches.length; i++) {
-
+            
             if (e.changedTouches[i].identifier == universe.touchCoord.id) {
-
+                
                 var endCoords = {x: e.changedTouches[0].pageX, y: e.changedTouches[0].pageY},
                     dif = {moveX: endCoords.x - universe.touchCoord.x, moveY: endCoords.y - universe.touchCoord.y};
-
+                
                 var focus,
                     dist = 0;
-
+                
                 for (var i = 0; i < universe.systems.length; i++) {
-
+                    
                     var line;
-
+                    
                     var x = dif.moveX + universe.systems[i].coords.x,
-                            y = dif.moveY + universe.systems[i].coords.y;
-
+                        y = dif.moveY + universe.systems[i].coords.y;
+                    
                     line = lineDistance({x: 0, y: 0}, {x: x, y: y});
-
+                    
                     universe.systems[i].endCoords = {x: x, y: y};
-
+                    
                     if (line < dist || i == 0) {
-
+                        
                         dist = line;
                         focus = universe.systems[i];
-
+                        
                     }
-
+                    
                 }
-
-                universe.focus.init(focus);
-
+                
+                //universe.focus.init(focus);
+                
             }
             
         }
