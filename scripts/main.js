@@ -238,7 +238,7 @@ var universe = {
                     
                 }
                 
-                //universe.focus.init(focus);
+                universe.focus.init(focus);
                 
             }
             
