@@ -215,6 +215,8 @@ var universe = {
                     endCoords = {x: e.changedTouches[k].pageX, y:   e.changedTouches[k].pageY},
                     dif = {moveX: endCoords.x - universe.touchCoord.x, moveY: endCoords.y - universe.touchCoord.y};
                 
+                alert(e.changedTouches[0]+'   '+e.changedTouches[k])
+                
                 var focus,
                     dist = 0;
                 
@@ -238,7 +240,7 @@ var universe = {
                     
                 }
                 
-                //universe.focus.init(focus);
+                universe.focus.init(focus);
                 
             }
             
