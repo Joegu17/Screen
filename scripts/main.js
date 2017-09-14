@@ -211,7 +211,7 @@ var universe = {
             
             if (e.changedTouches[i].identifier == universe.touchCoord.id) {
                 
-                var endCoords = {x: e.changedTouches[0].pageX, y: e.changedTouches[0].pageY},
+                var endCoords = {x: e.changedTouches[i].pageX, y: e.changedTouches[i].pageY},
                     dif = {moveX: endCoords.x - universe.touchCoord.x, moveY: endCoords.y - universe.touchCoord.y};
                 
                 var focus,
