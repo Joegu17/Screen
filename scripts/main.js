@@ -211,27 +211,28 @@ var universe = {
             
             if (e.changedTouches[i].identifier == universe.touchCoord.id) {
                 
-                var endCoords = {x: e.changedTouches[i].pageX, y: e.changedTouches[i].pageY},
+                var k = e.changedTouches.length - 1,
+                    endCoords = {x: e.changedTouches[k].pageX, y:   e.changedTouches[k].pageY},
                     dif = {moveX: endCoords.x - universe.touchCoord.x, moveY: endCoords.y - universe.touchCoord.y};
                 
                 var focus,
                     dist = 0;
                 
-                for (var i = 0; i < universe.systems.length; i++) {
+                for (var j = 0; j < universe.systems.length; j++) {
                     
                     var line;
                     
-                    var x = dif.moveX + universe.systems[i].coords.x,
-                        y = dif.moveY + universe.systems[i].coords.y;
+                    var x = dif.moveX + universe.systems[j].coords.x,
+                        y = dif.moveY + universe.systems[j].coords.y;
                     
                     line = lineDistance({x: 0, y: 0}, {x: x, y: y});
                     
-                    universe.systems[i].endCoords = {x: x, y: y};
+                    universe.systems[j].endCoords = {x: x, y: y};
                     
                     if (line < dist || i == 0) {
                         
                         dist = line;
-                        focus = universe.systems[i];
+                        focus = universe.systems[j];
                         
                     }
                     
