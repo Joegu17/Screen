@@ -1,6 +1,7 @@
 // JavaScript Document
 window.requestAnimationFrame = window.requestAnimationFrame || window.webkitRequestAnimationFrame;
 
+screen.orientation.lock('portrait-primary');
 
 var w = window.innerWidth,
     h = window.innerHeight,
