@@ -3,10 +3,11 @@ window.requestAnimationFrame = window.requestAnimationFrame || window.webkitRequ
 
 //screen.orientation.lock('portrait-primary');
 
-var size = document.getElementById('startBild');
+var w = window.screen.width,
+    h = window.screen.height;
 
-var w = size.innerWidth,
-    h = size.height;
+/*var w = $('#startBild').width(),
+    h = $('#startBild').height();*/
     
 alert(w+'   '+h);
 
