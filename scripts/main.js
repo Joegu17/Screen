@@ -31,6 +31,10 @@ function resize() {
     
     w = window.innerWidth;
     h = window.innerHeight;
+    actualW = w;
+    actualH = h;
+    borderLeft = 0;
+    borderTop = 0;
     
     if (h < w*16/9) {
     
