@@ -13,3 +13,5 @@
 <preference name="DisallowOverscroll" value="true"/>
 
 <preference name="Orientation" value="landscape"/>
+
+</widget>
