@@ -62,4 +62,8 @@ table {
     position: absolute;
     background-color: black;
     border-color: aqua;
+    left: 50%;
+    top: 50%;
+    width: 10%;
+    height: 10%;
 }

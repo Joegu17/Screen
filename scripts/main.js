@@ -22,5 +22,11 @@ if (h < w*16/9) {
     
 }
 
-$('.hintergrund').css({width: actualW+'px', height: actualH+'px', 
-                       left: borderLeft+'px', top: borderTop+'px'});
+$('.hintergrund').css({width: actualW+'px', height: actualH+'px', left: borderLeft+'px', top: borderTop+'px'});
+//$('#startButton').css({width: actualW*0.6+'px', height: actualH*0.1+'px', left: w/2+'px', top: h/2+'px'});
+
+window.addEventListener('orientationchange', resize);
+
+function resize() {
+    alert(screen.orientation);
+}
