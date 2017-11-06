@@ -1,7 +1,7 @@
 // JavaScript Document
 window.requestAnimationFrame = window.requestAnimationFrame || window.webkitRequestAnimationFrame;
 
-screen.orientation.lock('portrait-primary');
+//screen.orientation.lock('portrait-primary');
 
 var w = window.innerWidth,
     h = window.innerHeight,
@@ -28,5 +28,22 @@ $('.hintergrund').css({width: actualW+'px', height: actualH+'px', left: borderLe
 window.addEventListener('orientationchange', resize);
 
 function resize() {
-    alert(screen.orientation);
+    
+    w = window.innerWidth;
+    h = window.innerHeight;
+    
+    if (h < w*16/9) {
+    
+    actualW = h/16*9;
+    borderLeft = (w-actualW)/2;
+    
+    } else {
+    
+    actualH = w*16/9;
+    borderTop = (h-actualH)/2;
+        
+    }
+        
+    $('.hintergrund').css({width: actualW+'px', height: actualH+'px', left: borderLeft+'px', top: borderTop+'px'});
+        
 }
