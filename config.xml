@@ -1,0 +1,15 @@
+<widget id="com.phonegap.Screen" version="1.0.0">
+
+<name>TestApp</name>
+
+<description></description>
+
+<author email="joel@familiehari.ch">Joel Hari</author>
+
+<content src="index.html"/>
+
+<preference name="Fullscreen" value="true"/>
+
+<preference name="DisallowOverscroll" value="true"/>
+
+<preference name="Orientation" value="landscape"/>
