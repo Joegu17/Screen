@@ -16,6 +16,6 @@ function resize() {
     w = window.innerWidth;
     h = window.innerHeight;
         
-    $('.hintergrund').css({width: w+'px', height: h+'px'});
+    $('.hintergrund').css({width: h+'px', height: w+'px'});
         
 }
