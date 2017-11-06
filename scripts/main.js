@@ -9,3 +9,4 @@ var w = screen.width,
 $('.hintergrund').css({width: w+'px', height: h+'px'});
 $('#klotz').css({width: w*0.125+'px', height: h*2/9+'px'});
 
+$('#klotz').css('transform', 'translate3d('+(-w*1.125)+'px, 0px, 0px)');

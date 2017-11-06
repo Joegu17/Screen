@@ -62,6 +62,8 @@ table {
     position: absolute;
     background-color: black;
     border-color: aqua;
-    left: 50%;
+    left: 100%;
     bottom: 0;
+    transition-duration: 2s;
+    transition-timing-function: linear;
 }
