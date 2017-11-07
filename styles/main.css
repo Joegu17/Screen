@@ -55,7 +55,7 @@ table {
     right: 0px;
     overflow: hidden;
     background-color: antiquewhite;
-    display: inherit;
+    display: none;
 }
 
 #klotz {
@@ -66,6 +66,7 @@ table {
     transition-timing-function: linear;
     background-image: url(../images/piece.png);
     background-size: cover;
+    display: none;
 }
 
 #bild1 {
@@ -76,6 +77,7 @@ table {
     height: 200px;
     background-image: url(../images/beach_ball.png);
     background-size: cover;
+    display: none;
 }
 
 #bild2 {
@@ -87,4 +89,14 @@ table {
     background-image: url(../images/banger_ball.bmp);
     background-size: cover;
     display: none;
+}
+
+#level1 {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    background-image: url(../images/level11.png);
+    background-size: cover;
+    transition-duration: 20s;
+    transition-timing-function: linear;
 }

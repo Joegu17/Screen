@@ -7,6 +7,9 @@ var w = screen.width,
 
 $('.hintergrund').css({width: w+'px', height: h+'px'});
 $('#klotz').css({width: h*3/18/242*353+'px', height: h*3/18+'px'});
+$('#level1').css({width: w*10+'px', height: h+'px'});
+
+$('#level1').css('transform', 'translate3d('+(-w*9)+'px, 0px, 0px)');
 
 function loop(direction) {
     
@@ -42,4 +45,4 @@ function loop(direction) {
     
 }
 
-loop(d);
+//loop(d);
