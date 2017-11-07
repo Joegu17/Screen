@@ -95,10 +95,10 @@ table {
     position: absolute;
     left: 0px;
     top: 0px;
-    background-image: url(../images/level12.png);
+    background-image: url(../images/level12_1080.png);
     background-size: cover;
     overflow: hidden;
-    transition-duration: 30s;
+    transition-duration: 25s;
     transition-timing-function: linear;
 }
 

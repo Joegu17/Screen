@@ -48,7 +48,7 @@ function loop() {
     
     d = d * (-1);
     
-    window.setTimeout(loop, 30000);
+    window.setTimeout(loop, 26000);
     
 }
 
