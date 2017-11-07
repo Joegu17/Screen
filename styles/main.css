@@ -60,10 +60,31 @@ table {
 
 #klotz {
     position: absolute;
-    background-color: black;
-    border-color: aqua;
     left: 100%;
-    bottom: 0;
-    transition-duration: 2s;
+    bottom: 10%;
+    transition-duration: 3s;
     transition-timing-function: linear;
+    background-image: url(../images/piece.png);
+    background-size: cover;
+}
+
+#bild1 {
+    position: absolute;
+    left: 10%;
+    top: 10%;
+    width: 200px;
+    height: 200px;
+    background-image: url(../images/beach_ball.png);
+    background-size: cover;
+}
+
+#bild2 {
+    position: absolute;
+    left: 10%;
+    top: 10%;
+    width: 200px;
+    height: 200px;
+    background-image: url(../images/banger_ball.bmp);
+    background-size: cover;
+    display: none;
 }
