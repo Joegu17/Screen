@@ -3,7 +3,7 @@ window.requestAnimationFrame = window.requestAnimationFrame || window.webkitRequ
 
 var w = screen.width,
     h = screen.height,
-    d = -1;
+    d = 1;
 
 $('.hintergrund').css({width: w+'px', height: h+'px'});
 $('#klotz').css({width: h*3/18/242*353+'px', height: h*3/18+'px'});
@@ -11,11 +11,12 @@ $('#level1').css({width: h*10+'px', height: h+'px'});
 
 
 
-function loop(direction) {
+function loop() {
     
-    if (direction == 1) {
+    if (d == 1) {
         
         $('#level1').css('transform', 'translate3d('+(-h*10+w)+'px, 0px, 0px)');
+        
         
         //$('#klotz').css('transform', 'translate3d('+(-w-h*3/18/242*353)+'px, 0px, 0px)');
         
@@ -31,6 +32,8 @@ function loop(direction) {
         
         $('#level1').css('transform', 'none');
         
+        
+        
         //$('#klotz').css('transform', 'none');
         
         //$('#bild').css('background-image', 'url(../images/beach_ball.png)');
@@ -45,8 +48,8 @@ function loop(direction) {
     
     d = d * (-1);
     
-    window.setTimeout(loop, 30100, d);
+    window.setTimeout(loop, 30000);
     
 }
 
-loop(d);
+loop();
