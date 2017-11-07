@@ -61,7 +61,7 @@ table {
 #klotz {
     position: absolute;
     left: 100%;
-    bottom: 10%;
+    bottom: 0;
     transition-duration: 3s;
     transition-timing-function: linear;
     background-image: url(../images/piece.png);
