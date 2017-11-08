@@ -55,6 +55,8 @@ table {
     right: 0px;
     overflow: hidden;
     background-color: antiquewhite;
+    background-image: url(../images/level1.gif);
+    background-size: cover;
     display: inherit;
 }
 
@@ -66,7 +68,6 @@ table {
     transition-timing-function: linear;
     background-image: url(../images/piece.png);
     background-size: cover;
-    display: none;
 }
 
 #bild1 {
@@ -77,7 +78,6 @@ table {
     height: 200px;
     background-image: url(../images/beach_ball.png);
     background-size: cover;
-    display: none;
 }
 
 #bild2 {
@@ -88,17 +88,5 @@ table {
     height: 200px;
     background-image: url(../images/banger_ball.bmp);
     background-size: cover;
-    display: none;
-}
-
-#level1 {
-    position: absolute;
-    left: 0px;
-    top: 0px;
-    background-image: url(../images/level12_1080.png);
-    background-size: cover;
-    overflow: hidden;
-    transition-duration: 25s;
-    transition-timing-function: linear;
 }
 
