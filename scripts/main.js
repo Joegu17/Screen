@@ -20,9 +20,9 @@ function loop() {
         
         //$('#bild').css({'background-image': 'url(../images/banger_ball.bmp)'});
         
-        //$('#bild1').css({display: 'none'});
+        $('#bild1').css({display: 'none'});
         
-        //$('#bild2').css({display: 'inherit'});
+        $('#bild2').css({display: 'inherit'});
         
     } else {
         
@@ -32,9 +32,9 @@ function loop() {
         
         //$('#bild').css({'background-image': 'url(../images/beach_ball.png)'});
         
-        //$('#bild1').css({display: 'inherit'});
+        $('#bild1').css({display: 'inherit'});
         
-        //$('#bild2').css({display: 'none'});
+        $('#bild2').css({display: 'none'});
         
     }
     

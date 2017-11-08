@@ -68,6 +68,7 @@ table {
     transition-timing-function: linear;
     background-image: url(../images/piece.png);
     background-size: cover;
+    display: none;
 }
 
 #bild1 {
